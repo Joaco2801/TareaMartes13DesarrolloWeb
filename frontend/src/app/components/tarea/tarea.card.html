@@ -1,0 +1,63 @@
+@if (this.modo() === 'ver') {
+  @if (this.tarea(); as t) {
+    <article class="card tarea" [ngClass]="{ cerrada: t.estado === 'Cerrada' }">
+      <header>
+        <span class="badge" [ngClass]="'prioridad-' + t.prioridad.charAt(0)">{{ this.etiquetaPrioridad(t.prioridad) }}</span>
+        <span class="badge estado" [ngClass]="{ 'estado-cerrada': t.estado === 'Cerrada' }">{{ t.estado }}</span>
+      </header>
+
+      <h3>{{ t.titulo }}</h3>
+      <p class="descripcion">{{ t.descripcion || 'Sin descripción.' }}</p>
+
+      <dl class="meta">
+        <div><dt>Grupo</dt><dd>{{ t.grupo }}</dd></div>
+        <div><dt>Creada</dt><dd>{{ t.creada | date: 'dd/MM/yyyy' }}</dd></div>
+        @if (t.terminada) { <div><dt>Terminada</dt><dd>{{ t.terminada | date: 'dd/MM/yyyy' }}</dd></div> }
+      </dl>
+
+      <footer class="actions">
+        <button type="button" class="btn" (click)="this.editar.emit(t)">Editar</button>
+        <button type="button" class="btn btn-danger" (click)="this.eliminar.emit(t)">Eliminar</button>
+      </footer>
+    </article>
+  }
+} @else {
+  <form class="card tarea form" novalidate (submit)="this.submitForm($event)">
+    <h3>{{ this.tarea() ? 'Editar tarea' : 'Nueva tarea' }}</h3>
+
+    <div class="field">
+      <label for="titulo">Título</label>
+      <input id="titulo" type="text" [formField]="this.tareaForm.titulo" />
+      @if (this.tareaForm.titulo().touched()) {
+        @for (e of this.tareaForm.titulo().errors(); track e.kind) {
+          <small class="error">{{ e.message }}</small>
+        }
+      }
+    </div>
+
+    <div class="field">
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" rows="4" [formField]="this.tareaForm.descripcion"></textarea>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="grupo">Grupo</label>
+        <select id="grupo" [formField]="this.tareaForm.grupo">
+          @for (g of this.grupos; track g) { <option [value]="g">{{ g }}</option> }
+        </select>
+      </div>
+      <div class="field">
+        <label for="prioridad">Prioridad</label>
+        <select id="prioridad" [formField]="this.tareaForm.prioridad">
+          @for (p of this.prioridades; track p.valor) { <option [value]="p.valor">{{ p.etiqueta }}</option> }
+        </select>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn" (click)="this.cancelar.emit()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">{{ this.tarea() ? 'Guardar cambios' : 'Crear tarea' }}</button>
+    </div>
+  </form>
+}

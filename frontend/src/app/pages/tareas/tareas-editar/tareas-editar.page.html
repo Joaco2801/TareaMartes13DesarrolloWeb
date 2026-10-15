@@ -1,0 +1,13 @@
+<div class="page-header">
+  <div>
+    <h1>Editar tarea</h1>
+    @if (this.tarea(); as tarea) {
+      <p class="subtitle">Tarea #{{ tarea.id_tarea }}</p>
+    }
+  </div>
+  <button type="button" class="btn" (click)="this.volver()">Volver al listado</button>
+</div>
+
+@if (this.tarea(); as tarea) {
+  <app-tarea-card modo="editar" [tarea]="tarea" (guardarTarea)="this.onGuardarTarea($event)" (cancelar)="this.volver()"></app-tarea-card>
+}

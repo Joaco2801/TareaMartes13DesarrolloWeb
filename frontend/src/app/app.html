@@ -1,0 +1,25 @@
+<div id="app-layout">
+  <header id="app-header">
+    <h1>UCU - AUTOGESTIÓN DE TAREAS</h1>
+  </header>
+
+  <div id="app-medio">
+    <aside id="app-sidebar">
+      <nav>
+        <ul>
+          <li><a routerLink="/home" routerLinkActive="activo">Home</a></li>
+          <li><a routerLink="/usuarios" routerLinkActive="activo">Listar usuarios</a></li>
+          <li><a routerLink="/tareas" routerLinkActive="activo">Listar tareas</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main id="app-page">
+      <router-outlet />
+    </main>
+  </div>
+
+  <footer id="app-footer">
+    <p>© 2026 - CUCU</p>
+  </footer>
+</div>

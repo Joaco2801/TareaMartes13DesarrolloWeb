@@ -1,0 +1,21 @@
+:host { display: block; }
+.tarea { display: flex; flex-direction: column; gap: .75rem; height: 100%; border-top: 4px solid #003a70; }
+.tarea.form { display: grid; max-width: 36rem; height: auto; border-top: 4px solid #003a70; }
+header { display: flex; gap: .5rem; justify-content: space-between; }
+h3 { margin: 0; font-size: 1.05rem; line-height: 1.3; }
+.descripcion { margin: 0; color: var(--muted); flex: 1; }
+.cerrada h3 { text-decoration: line-through; text-decoration-color: var(--muted); }
+.cerrada { opacity: .85; }
+.meta { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 1rem; margin: 0; font-size: .85rem; }
+.meta dt { color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
+.meta dd { margin: 0; }
+.row { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+.prioridad-0 { background: var(--ok-bg); color: var(--ok); }
+.prioridad-1 { background: var(--warn-bg); color: var(--warn); }
+.prioridad-2 { background: var(--danger-bg); color: var(--danger); }
+.estado { background: var(--info-bg); color: var(--info); }
+.estado-cerrada { background: var(--neutral-bg); color: var(--muted); }
+
+@media (max-width: 480px) {
+  .row, .meta { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,13 @@
+<div class="page-header">
+  <div>
+    <h1>Editar usuario</h1>
+    @if (this.usuario(); as usuario) {
+      <p class="subtitle">{{ usuario.nombre_completo }} · #{{ usuario.id_usuario }}</p>
+    }
+  </div>
+  <button type="button" class="btn" (click)="this.volver()">Volver al listado</button>
+</div>
+
+@if (this.usuario(); as usuario) {
+  <app-usuario-form [usuario]="usuario" [error]="this.error()" (guardarUsuario)="this.onGuardarUsuario($event)" (cancelar)="this.volver()"></app-usuario-form>
+}

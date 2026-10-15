@@ -1,0 +1,17 @@
+<div class="page-header">
+  <div>
+    <h1>Tareas</h1>
+    <p class="subtitle">{{ tareas().length }} tareas</p>
+  </div>
+  <a class="btn btn-primary" routerLink="/tareas/crear">Nueva tarea</a>
+</div>
+
+@if (tareas().length === 0) {
+  <p class="card empty">No hay tareas. Creá la primera con «Nueva tarea».</p>
+} @else {
+  <div class="grid">
+    @for (t of tareas(); track t.id_tarea) {
+      <app-tarea-card [tarea]="t" [creador]="creador(t)" (editar)="editar($event)" (eliminar)="eliminar($event)" />
+    }
+  </div>
+}

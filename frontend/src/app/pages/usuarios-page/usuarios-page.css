@@ -1,0 +1,5 @@
+.acciones { text-align: right; white-space: nowrap; }
+.acciones .btn + .btn { margin-left: .4rem; }
+.grupo { background: var(--info-bg); color: var(--info); margin-right: .25rem; }
+.activo { background: var(--ok-bg); color: var(--ok); }
+.inactivo { background: var(--neutral-bg); color: var(--muted); }

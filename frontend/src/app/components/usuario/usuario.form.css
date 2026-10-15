@@ -1,0 +1,4 @@
+:host { display: block; max-width: 36rem; }
+.form { display: grid; gap: 1rem; }
+.row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+.checks { display: flex; gap: 1.25rem; flex-wrap: wrap; }

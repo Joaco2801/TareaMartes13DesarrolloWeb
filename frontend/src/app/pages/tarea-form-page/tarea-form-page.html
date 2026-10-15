@@ -1,0 +1,13 @@
+<div class="page-header">
+  <div>
+    <h1>{{ editando() ? 'Editar tarea' : 'Nueva tarea' }}</h1>
+    @if (tarea(); as t) { <p class="subtitle">Tarea #{{ t.id_tarea }}</p> }
+  </div>
+  <a class="btn" routerLink="/tareas">Volver al listado</a>
+</div>
+
+@if (editando() && !tarea()) {
+  <p class="card empty">No existe una tarea con id «{{ id_tarea() }}».</p>
+} @else {
+  <app-tarea-card modo="editar" [tarea]="tarea()" (guardar)="guardar($event)" (cancelar)="volver()" />
+}

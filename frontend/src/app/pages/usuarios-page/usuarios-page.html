@@ -1,0 +1,49 @@
+<div class="page-header">
+  <div>
+    <h1>Usuarios</h1>
+    <p class="subtitle">{{ usuarios().length }} usuarios registrados</p>
+  </div>
+  <a class="btn btn-primary" routerLink="/usuarios/crear">Nuevo usuario</a>
+</div>
+
+@if (usuarios().length === 0) {
+  <p class="card empty">No hay usuarios. Creá el primero con «Nuevo usuario».</p>
+} @else {
+  <div class="card table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Nombre completo</th>
+          <th>Nacimiento</th>
+          <th>Grupos</th>
+          <th>Estado</th>
+          <th class="acciones">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (u of usuarios(); track u.id_usuario) {
+          <tr>
+            <td>{{ u.id_usuario }}</td>
+            <td><code>{{ u.username }}</code></td>
+            <td>{{ u.nombre_completo }}</td>
+            <td>{{ u.fecha_nacimiento | date: 'dd/MM/yyyy' }}</td>
+            <td>
+              @for (g of u.grupos; track g) { <span class="badge grupo">{{ g }}</span> }
+            </td>
+            <td>
+              <span class="badge" [class.activo]="u.activo" [class.inactivo]="!u.activo">
+                {{ u.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            <td class="acciones">
+              <button type="button" class="btn btn-sm" (click)="editar(u)">Editar</button>
+              <button type="button" class="btn btn-sm btn-danger" (click)="borrar(u)">Borrar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

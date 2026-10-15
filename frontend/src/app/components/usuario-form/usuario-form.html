@@ -1,0 +1,57 @@
+<form class="card form" [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+  @if (error(); as mensaje) {
+    <p class="alert" role="alert">{{ mensaje }}</p>
+  }
+
+  <div class="field">
+    <label for="username">Username</label>
+    <input id="username" type="text" formControlName="username" autocomplete="off" />
+    @if (editando) {
+      <small class="hint">El username no se puede modificar.</small>
+    } @else if (invalido('username')) {
+      <small class="error">Entre 3 y 30 caracteres: letras, números, punto, guion o guion bajo.</small>
+    }
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <label for="nombres">Nombres</label>
+      <input id="nombres" type="text" formControlName="nombres" />
+      @if (invalido('nombres')) { <small class="error">Los nombres son obligatorios.</small> }
+    </div>
+    <div class="field">
+      <label for="apellidos">Apellidos</label>
+      <input id="apellidos" type="text" formControlName="apellidos" />
+      @if (invalido('apellidos')) { <small class="error">Los apellidos son obligatorios.</small> }
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="fecha_nacimiento">Fecha de nacimiento</label>
+    <input id="fecha_nacimiento" type="date" formControlName="fecha_nacimiento" />
+    @if (invalido('fecha_nacimiento')) { <small class="error">La fecha de nacimiento es obligatoria.</small> }
+  </div>
+
+  <fieldset class="field">
+    <legend>Grupos</legend>
+    <div class="checks">
+      @for (g of grupos; track g) {
+        <label class="check">
+          <input type="checkbox" [checked]="tieneGrupo(g)" (change)="alternarGrupo(g, $any($event.target).checked)" />
+          {{ g }}
+        </label>
+      }
+    </div>
+    @if (invalido('grupos')) { <small class="error">Elegí al menos un grupo.</small> }
+  </fieldset>
+
+  <label class="check">
+    <input type="checkbox" formControlName="activo" />
+    Usuario activo
+  </label>
+
+  <div class="actions">
+    <button type="button" class="btn" (click)="cancelar.emit()">Cancelar</button>
+    <button type="submit" class="btn btn-primary">{{ editando ? 'Guardar cambios' : 'Crear usuario' }}</button>
+  </div>
+</form>

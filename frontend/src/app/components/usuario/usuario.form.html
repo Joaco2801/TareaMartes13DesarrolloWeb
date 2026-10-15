@@ -1,0 +1,75 @@
+<form class="card form" novalidate (submit)="this.submitForm($event)">
+  @if (this.error(); as mensaje) {
+    <p class="alert" role="alert">{{ mensaje }}</p>
+  }
+
+  <div class="field">
+    <label for="username">Username</label>
+    <input id="username" type="text" autocomplete="off" [formField]="this.usuarioForm.username" />
+    @if (this.editando) {
+      <small class="hint">El username no se puede modificar.</small>
+    } @else if (this.usuarioForm.username().touched()) {
+      @for (e of this.usuarioForm.username().errors(); track e.kind) {
+        <small class="error">{{ e.message }}</small>
+      }
+    }
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <label for="nombres">Nombres</label>
+      <input id="nombres" type="text" [formField]="this.usuarioForm.nombres" />
+      @if (this.usuarioForm.nombres().touched()) {
+        @for (e of this.usuarioForm.nombres().errors(); track e.kind) {
+          <small class="error">{{ e.message }}</small>
+        }
+      }
+    </div>
+    <div class="field">
+      <label for="apellidos">Apellidos</label>
+      <input id="apellidos" type="text" [formField]="this.usuarioForm.apellidos" />
+      @if (this.usuarioForm.apellidos().touched()) {
+        @for (e of this.usuarioForm.apellidos().errors(); track e.kind) {
+          <small class="error">{{ e.message }}</small>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="fecha_nacimiento">Fecha de nacimiento</label>
+    <input id="fecha_nacimiento" type="date" [formField]="this.usuarioForm.fecha_nacimiento" />
+    @if (this.usuarioForm.fecha_nacimiento().touched()) {
+      @for (e of this.usuarioForm.fecha_nacimiento().errors(); track e.kind) {
+        <small class="error">{{ e.message }}</small>
+      }
+    }
+  </div>
+
+  <fieldset class="field">
+    <legend>Grupos</legend>
+    <div class="checks">
+      @for (grupo of this.gruposDisponibles; track grupo) {
+        <label class="check">
+          <input type="checkbox" [checked]="this.tieneGrupo(grupo)" (change)="this.alternarGrupo(grupo, $any($event.target).checked)" />
+          {{ grupo }}
+        </label>
+      }
+    </div>
+    @if (this.usuarioForm.grupos().touched()) {
+      @for (e of this.usuarioForm.grupos().errors(); track e.kind) {
+        <small class="error">{{ e.message }}</small>
+      }
+    }
+  </fieldset>
+
+  <label class="check">
+    <input type="checkbox" [formField]="this.usuarioForm.activo" />
+    Usuario activo
+  </label>
+
+  <div class="actions">
+    <button type="button" class="btn" (click)="this.cancelar.emit()">Cancelar</button>
+    <button type="submit" class="btn btn-primary">{{ this.editando ? 'Guardar cambios' : 'Crear usuario' }}</button>
+  </div>
+</form>

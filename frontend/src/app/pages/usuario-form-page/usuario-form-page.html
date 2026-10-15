@@ -1,0 +1,13 @@
+<div class="page-header">
+  <div>
+    <h1>{{ editando() ? 'Editar usuario' : 'Nuevo usuario' }}</h1>
+    @if (usuario(); as u) { <p class="subtitle">{{ u.nombre_completo }} · #{{ u.id_usuario }}</p> }
+  </div>
+  <a class="btn" routerLink="/usuarios">Volver al listado</a>
+</div>
+
+@if (editando() && !usuario()) {
+  <p class="card empty">No existe un usuario con id «{{ id_usuario() }}».</p>
+} @else {
+  <app-usuario-form [usuario]="usuario()" [error]="error()" (guardar)="guardar($event)" (cancelar)="volver()" />
+}
