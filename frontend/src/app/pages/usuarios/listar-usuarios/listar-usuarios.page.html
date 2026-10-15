@@ -1,51 +1,36 @@
-<div class="page-header">
-  <div>
-    <h1>Usuarios</h1>
-    <p class="subtitle">{{ this.usuarios().length }} usuarios registrados</p>
-  </div>
-  <button type="button" class="btn btn-primary" (click)="this.goToCrear()">Nuevo usuario</button>
-</div>
-
-<div class="card table-wrap">
-  <table>
-    <thead>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Username</th>
+      <th>Fecha de nacimiento</th>
+      <th>Grupos</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (usuario of this.usuarios(); track usuario.id_usuario) {
       <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Nombre completo</th>
-        <th>Nacimiento</th>
-        <th>Grupos</th>
-        <th>Estado</th>
-        <th class="acciones">Acciones</th>
+        <td>{{ usuario.id_usuario }}</td>
+        <td>{{ usuario.nombres }}</td>
+        <td>{{ usuario.apellidos }}</td>
+        <td>{{ usuario.username }}</td>
+        <td>{{ usuario.fecha_nacimiento | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ usuario.grupos.join(', ') }}</td>
+        <td>{{ usuario.activo ? 'Activo' : 'Inactivo' }}</td>
+        <td>
+          <button type="button" (click)="this.goToEditar(usuario)">Editar</button>
+          <button type="button" (click)="this.borrar(usuario)">Eliminar</button>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      @for (usuario of this.usuarios(); track usuario.id_usuario) {
-        <tr>
-          <td>{{ usuario.id_usuario }}</td>
-          <td><code>{{ usuario.username }}</code></td>
-          <td>{{ usuario.nombre_completo }}</td>
-          <td>{{ usuario.fecha_nacimiento | date: 'dd/MM/yyyy' }}</td>
-          <td>
-            @for (grupo of usuario.grupos; track grupo) {
-              <span class="badge grupo">{{ grupo }}</span>
-            }
-          </td>
-          <td>
-            <span class="badge" [ngClass]="usuario.activo ? 'activo' : 'inactivo'">
-              {{ usuario.activo ? 'Activo' : 'Inactivo' }}
-            </span>
-          </td>
-          <td class="acciones">
-            <button type="button" class="btn btn-sm" (click)="this.goToEditar(usuario)">Editar</button>
-            <button type="button" class="btn btn-sm btn-danger" (click)="this.borrar(usuario)">Borrar</button>
-          </td>
-        </tr>
-      } @empty {
-        <tr>
-          <td colspan="7" class="vacio">No se encontraron usuarios registrados.</td>
-        </tr>
-      }
-    </tbody>
-  </table>
-</div>
+    } @empty {
+      <tr>
+        <td colspan="8">No se encontraron usuarios registrados.</td>
+      </tr>
+    }
+  </tbody>
+</table>
+<button type="button" (click)="this.goToCrear()">Crear Usuario</button>

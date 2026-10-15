@@ -1,12 +1,4 @@
-<div class="page-header">
-  <div>
-    <h1>Tareas</h1>
-    <p class="subtitle">{{ this.tareas().length }} tareas</p>
-  </div>
-  <button type="button" class="btn btn-primary" (click)="this.goToCrear()">Nueva tarea</button>
-</div>
-
-<div class="grid">
+<div class="tarjetas">
   @for (tarea of this.tareas(); track tarea.id_tarea) {
     <app-tarea-card
       [tarea]="tarea"
@@ -14,6 +6,7 @@
       (eliminar)="this.onEliminar($event)"
     ></app-tarea-card>
   } @empty {
-    <p class="card empty">No hay tareas. Creá la primera con «Nueva tarea».</p>
+    <p>No se encontraron tareas registradas.</p>
   }
 </div>
+<button type="button" (click)="this.goToCrear()">Crear Tarea</button>

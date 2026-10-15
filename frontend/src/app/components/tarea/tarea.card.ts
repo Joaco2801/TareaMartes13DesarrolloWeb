@@ -1,4 +1,4 @@
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, input, linkedSignal, output } from '@angular/core';
 import { form, FormField, maxLength, required, submit } from '@angular/forms/signals';
 import { PRIORIDADES } from '../../model/tarea';
@@ -21,7 +21,7 @@ interface TareaModel {
  * No conoce ningún servicio: todo sale por `output` y lo resuelve la page.
  */
 @Component({
-  imports: [FormField, DatePipe, NgClass],
+  imports: [FormField, DatePipe],
   selector: 'app-tarea-card',
   styleUrl: './tarea.card.css',
   templateUrl: './tarea.card.html',

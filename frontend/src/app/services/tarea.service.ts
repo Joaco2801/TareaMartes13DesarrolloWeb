@@ -4,10 +4,9 @@ import type { Tarea, TareaDatos } from '../model/tarea';
 /** Usuario ficticio que figura como creador de las tareas nuevas (el superadmin). */
 export const ID_CREADOR_ACTUAL = 1;
 
-/** Tareas de ejemplo tomadas del proyecto de referencia, con fechas fijas. */
+/** Mismos datos de ejemplo que `api/db/00.sql` (con fechas fijas para que sean estables). */
 const tarea = (
   id_tarea: number,
-  id_creador: number,
   grupo: Tarea['grupo'],
   titulo: string,
   descripcion: string,
@@ -16,7 +15,7 @@ const tarea = (
   terminada: string | null,
 ): Tarea => ({
   id_tarea,
-  id_creador,
+  id_creador: 1,
   grupo,
   titulo,
   descripcion,
@@ -27,10 +26,18 @@ const tarea = (
 });
 
 const TAREAS_INICIALES: Tarea[] = [
-  tarea(1, 1, 'admin', 'Organizar Semana UCU', 'Lucas Chiappini debe colaborar con la organización de la Semana UCU, coordinando actividades y ayudando con la logística de los eventos.', '2:alta', '2026-09-25T00:00:00Z', null),
-  tarea(2, 2, 'user', 'Completar Reto 1', 'Felipe Castillo debe completar el Reto 1 de la asignatura, resolver las consignas propuestas y entregar el trabajo en la fecha establecida.', '0:baja', '2026-10-04T00:00:00Z', '2026-10-05T00:00:00Z'),
-  tarea(3, 3, 'superadmin', 'Cubrir horas de beca', 'Ernesto Diaz debe cumplir con las horas correspondientes a su beca en la UCU y registrar las actividades realizadas.', '2:alta', '2026-10-08T00:00:00Z', null),
-  tarea(4, 1, 'user', 'Preparar entrega de programación', 'Lucas Chiappini debe revisar el proyecto de Angular, verificar el funcionamiento de los componentes y preparar la entrega para la asignatura.', '2:alta', '2026-10-04T00:00:00Z', '2026-10-10T00:00:00Z'),
+  tarea(1, 'superadmin', 'Promover a usuario jperez a rol admin', 'Aprobar la solicitud de permisos elevados tras auditoría de seguridad.', '2:alta', '2026-10-12T12:00:00Z', null),
+  tarea(2, 'superadmin', 'Depurar logs de auditoría del sistema', 'Realizar purga de registros antiguos mayores a 90 días en la base de datos.', '1:media', '2026-10-09T12:00:00Z', '2026-10-13T12:00:00Z'),
+  tarea(3, 'superadmin', 'Renovar llaves maestras de cifrado JWT', 'Rotación anual de secretos para tokens de autenticación.', '2:alta', '2026-10-13T12:00:00Z', null),
+  tarea(4, 'superadmin', 'Crear cuenta de administrador para auditoría externa', 'Dar de alta al usuario temporal audit_ext con rol admin.', '0:baja', '2026-10-11T12:00:00Z', '2026-10-12T12:00:00Z'),
+  tarea(5, 'admin', 'Revisar reportes de usuarios bloqueados', 'Verificar intentos fallidos de inicio de sesión de la última semana.', '1:media', '2026-10-14T00:00:00Z', null),
+  tarea(6, 'admin', 'Actualizar documentación de la API', 'Sincronizar la especificación Swagger con las rutas de Fastify recientemente agregadas.', '0:baja', '2026-10-11T12:00:00Z', null),
+  tarea(7, 'admin', 'Monitorear uso de recursos del servidor', 'Evaluar consumo de CPU y memoria tras el último despliegue.', '2:alta', '2026-10-13T12:00:00Z', '2026-10-14T10:00:00Z'),
+  tarea(8, 'admin', 'Mantenimiento programado de base de datos', 'Ejecutar VACUUM ANALYZE durante la ventana de bajo tráfico.', '1:media', '2026-10-10T12:00:00Z', null),
+  tarea(9, 'user', 'Verificar configuración del repositorio', 'Verificar Verificar que el proyecto levanta y funciona sin problemas de configuraciòn.', '0:baja', '2026-10-04T12:00:00Z', '2026-10-05T12:00:00Z'),
+  tarea(10, 'user', 'Seleccionar método de pago', 'Seleccionar y fundamente el método de pago a usar en el proyecto.', '2:alta', '2026-10-14T06:00:00Z', null),
+  tarea(11, 'user', 'Tests', 'Revisar que están funcionando los tests unitarios.', '1:media', '2026-10-12T12:00:00Z', null),
+  tarea(12, 'user', 'Tests', 'Revisar los tests de integración.', '0:baja', '2026-10-13T12:00:00Z', '2026-10-14T08:00:00Z'),
 ];
 
 const ordenar = (lista: Tarea[]): Tarea[] =>

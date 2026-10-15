@@ -1,22 +1,34 @@
-#app-layout { display: flex; flex-direction: column; min-height: 100vh; }
+#app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-#app-header { background-color: #003a70; color: #fff; padding: .9rem 1.5rem; }
-#app-header h1 { font-size: 1.25rem; }
+#app-header {
+  background-color: #003a70;
+  color: white;
+}
 
-#app-medio { display: flex; flex: 1; }
+#app-medio {
+  display: flex;
+  flex: 1;
+}
 
-#app-sidebar { width: 240px; flex: 0 0 240px; background-color: #f2f2f2; padding: 1rem .75rem; }
-#app-sidebar ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
-#app-sidebar a { display: block; padding: .55rem .8rem; color: #30343a; text-decoration: none; font-weight: 500; }
-#app-sidebar a:hover, #app-sidebar a.activo { background: #e1e5e9; color: #003a70; }
+#app-footer {
+  background-color: #f2f2f2;
+}
 
-#app-page { flex: 1; overflow-y: auto; padding: 1.5rem; min-width: 0; }
+#app-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background-color: #f2f2f2;
+}
 
-#app-footer { background-color: #f2f2f2; color: var(--muted); padding: .75rem 1.5rem; font-size: .875rem; }
-#app-footer p { margin: 0; }
-
-@media (max-width: 700px) {
-  #app-medio { flex-direction: column; }
-  #app-sidebar { width: auto; flex-basis: auto; padding: .5rem; }
-  #app-sidebar ul { display: flex; flex-wrap: wrap; }
+#app-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 16px;
+  overflow-y: auto;
 }

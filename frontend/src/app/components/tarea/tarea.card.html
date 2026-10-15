@@ -1,28 +1,21 @@
 @if (this.modo() === 'ver') {
   @if (this.tarea(); as t) {
-    <article class="card tarea" [ngClass]="{ cerrada: t.estado === 'Cerrada' }">
-      <header>
-        <span class="badge" [ngClass]="'prioridad-' + t.prioridad.charAt(0)">{{ this.etiquetaPrioridad(t.prioridad) }}</span>
-        <span class="badge estado" [ngClass]="{ 'estado-cerrada': t.estado === 'Cerrada' }">{{ t.estado }}</span>
-      </header>
-
+    <article class="tarjeta">
       <h3>{{ t.titulo }}</h3>
-      <p class="descripcion">{{ t.descripcion || 'Sin descripción.' }}</p>
-
-      <dl class="meta">
-        <div><dt>Grupo</dt><dd>{{ t.grupo }}</dd></div>
-        <div><dt>Creada</dt><dd>{{ t.creada | date: 'dd/MM/yyyy' }}</dd></div>
-        @if (t.terminada) { <div><dt>Terminada</dt><dd>{{ t.terminada | date: 'dd/MM/yyyy' }}</dd></div> }
-      </dl>
-
-      <footer class="actions">
-        <button type="button" class="btn" (click)="this.editar.emit(t)">Editar</button>
-        <button type="button" class="btn btn-danger" (click)="this.eliminar.emit(t)">Eliminar</button>
-      </footer>
+      <p>{{ t.descripcion }}</p>
+      <p><strong>Grupo:</strong> {{ t.grupo }}</p>
+      <p><strong>Prioridad:</strong> {{ this.etiquetaPrioridad(t.prioridad) }}</p>
+      <p><strong>Estado:</strong> {{ t.estado }}</p>
+      <p><strong>Creada:</strong> {{ t.creada | date: 'yyyy/MM/dd':'UTC' }}</p>
+      @if (t.terminada) {
+        <p><strong>Terminada:</strong> {{ t.terminada | date: 'yyyy/MM/dd':'UTC' }}</p>
+      }
+      <button type="button" (click)="this.editar.emit(t)">Editar</button>
+      <button type="button" (click)="this.eliminar.emit(t)">Eliminar</button>
     </article>
   }
 } @else {
-  <form class="card tarea form" novalidate (submit)="this.submitForm($event)">
+  <form class="tarea form" novalidate (submit)="this.submitForm($event)">
     <h3>{{ this.tarea() ? 'Editar tarea' : 'Nueva tarea' }}</h3>
 
     <div class="field">

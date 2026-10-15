@@ -1,4 +1,4 @@
-import { DatePipe, NgClass } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from '../../../model/usuario';
@@ -8,7 +8,7 @@ import { UsuarioService } from '../../../services/usuario.service';
   selector: 'app-listar-usuarios',
   styleUrl: './listar-usuarios.page.css',
   templateUrl: './listar-usuarios.page.html',
-  imports: [DatePipe, NgClass],
+  imports: [DatePipe],
 })
 export class ListarUsuariosPage {
   private router = inject(Router);

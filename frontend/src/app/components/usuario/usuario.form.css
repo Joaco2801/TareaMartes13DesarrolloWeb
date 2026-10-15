@@ -1,4 +1,54 @@
-:host { display: block; max-width: 36rem; }
-.form { display: grid; gap: 1rem; }
-.row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
-.checks { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+:host {
+  display: block;
+}
+
+form {
+  border: 2px solid red;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  max-width: 20rem;
+  padding: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+}
+
+label,
+legend {
+  padding-bottom: 4px;
+}
+
+input {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: cyan 0 0 5px;
+}
+
+.row,
+.checks,
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 2px;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+}
+
+input[type='submit']:hover {
+  background-color: green;
+  color: white;
+}

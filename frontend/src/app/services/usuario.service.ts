@@ -1,13 +1,9 @@
 import { Injectable, signal } from '@angular/core';
 import type { Usuario, UsuarioDatos } from '../model/usuario';
 
-/** Mismos datos de ejemplo que `api/db/00.sql`. */
+/** Usuarios iniciales visibles en el frontend. */
 const USUARIOS_INICIALES: Usuario[] = [
-  { id_usuario: 1, username: 'superadmin', nombres: 'EL', apellidos: 'SUPERADMIN', fecha_nacimiento: '1995-12-08', nombre_completo: 'EL SUPERADMIN', grupos: ['superadmin'], activo: true },
-  { id_usuario: 2, username: 'admin', nombres: 'Administrador', apellidos: 'Sistema', fecha_nacimiento: '1985-03-15', nombre_completo: 'Administrador Sistema', grupos: ['admin', 'user'], activo: true },
   { id_usuario: 3, username: 'user', nombres: 'Un', apellidos: 'User', fecha_nacimiento: '1993-07-22', nombre_completo: 'Un User', grupos: ['user'], activo: true },
-  { id_usuario: 4, username: 'mgonzalez', nombres: 'Martín', apellidos: 'González', fecha_nacimiento: '1992-07-22', nombre_completo: 'Martín González', grupos: ['user'], activo: true },
-  { id_usuario: 5, username: 'srodriguez', nombres: 'Sofía', apellidos: 'Rodríguez', fecha_nacimiento: '1995-11-08', nombre_completo: 'Sofía Rodríguez', grupos: ['user'], activo: true },
   { id_usuario: 6, username: 'lfernandez', nombres: 'Lucas', apellidos: 'Fernández', fecha_nacimiento: '2010-01-30', nombre_completo: 'Lucas Fernández', grupos: ['user'], activo: true },
 ];
 
@@ -18,7 +14,7 @@ const USUARIOS_INICIALES: Usuario[] = [
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
   private readonly _usuarios = signal<Usuario[]>(USUARIOS_INICIALES);
-  private siguienteId = USUARIOS_INICIALES.length + 1;
+  private siguienteId = Math.max(...USUARIOS_INICIALES.map((usuario) => usuario.id_usuario)) + 1;
 
   /** Lista reactiva (ordenada por id, como la API). */
   readonly usuarios = this._usuarios.asReadonly();

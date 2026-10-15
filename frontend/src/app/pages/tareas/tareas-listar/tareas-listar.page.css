@@ -1,2 +1,5 @@
-.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 20rem)); justify-content: center; }
-.empty { grid-column: 1 / -1; width: 100%; }
+.tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
